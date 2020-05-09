@@ -12,6 +12,7 @@
 #define FREQUENCY_COUNTER_H
 
 #include <Arduino.h>
+
 #define BUFFER_SIZE         (10)
 #define MAX_FREQ            (1000)  /* 60000 RPM */
 #define MIN_FREQ            (10)    /*    10 RPM */
@@ -33,14 +34,13 @@ class FrequencyCounter {
     uint32_t ReadRPM(void);
     uint32_t ReadFrequency(void);
     static void EdgeDetected(void);
-    void Init(void);
+    
   
-
+  private:
+    void Init(void);
     int inputPin = -1;
     uint32_t freq[BUFFER_SIZE];
     int mode = RISING;
-
-    private:
 };
 
 #endif /* FREQUENCY_COUNTER_H */
