@@ -7,15 +7,17 @@ FrequencyCounter::FrequencyCounter(int _inputPin, int _mode){
 }
 
 void FrequencyCounter::Init(void){
-    pinMode(inputPin, INPUT);
+    pinMode(inputPin, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(inputPin), EdgeDetected, mode);
+    position = 0;
+    previousMicros = micros();
 }
 
 uint32_t FrequencyCounter::GetPeriodAverage(void){
     uint32_t sum = 0;
 
     for(uint8_t i = 0; i < BUFFER_SIZE;i++){
-        sum+=period[i];
+        sum += period[i];
     }
     return (sum/BUFFER_SIZE);
 }

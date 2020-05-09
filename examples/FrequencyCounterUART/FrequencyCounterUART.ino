@@ -1,6 +1,6 @@
 #include <FrequencyCounter.h>
 
-FrequencyCounter RPM(2, FALLING);
+FrequencyCounter RPM(3, FALLING);
 
 void setup() {
   // put your setup code here, to run once:

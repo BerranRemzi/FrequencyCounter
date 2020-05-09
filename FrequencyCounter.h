@@ -21,11 +21,12 @@
 #define STOPPED_PERIOD_US   (0xFFFFFFFF)
 #define OVERRANGE_PERIOD_US (0)
 
+static uint32_t period[BUFFER_SIZE];
+static uint8_t position;
+static uint32_t previousMicros;
+
 class FrequencyCounter {
   public:
-
-    typedef FrequencyCounter*(*EdgeDetected)(void);
-
     FrequencyCounter(int _inputPin, int _mode);
     uint32_t GetPeriodAverage(void);
     uint32_t ReadPeriod(void);
@@ -33,14 +34,13 @@ class FrequencyCounter {
     uint32_t ReadFrequency(void);
     static void EdgeDetected(void);
     void Init(void);
-  private:
+  
 
     int inputPin = -1;
-    int mode = RISING;
-    static uint32_t period[BUFFER_SIZE];
     uint32_t freq[BUFFER_SIZE];
-    static uint8_t position = 0;
-    static uint32_t previousMicros = 0;
+    int mode = RISING;
+
+    private:
 };
 
 #endif /* FREQUENCY_COUNTER_H */

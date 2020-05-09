@@ -3,5 +3,5 @@
     "board": "arduino:avr:micro",
     "programmer": "AVR ISP",
     "sketch": "examples\\FrequencyCounterLCD\\FrequencyCounterLCD.ino",
-    "output": "../ArduinoOutput"
+    "output": "..\\..\\ArduinoOutput"
 }
