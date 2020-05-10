@@ -18,12 +18,12 @@ void loop() {
   // put your main code here, to run repeatedly:
   uint32_t rpm = FrequencyCounter_ReadRPM();
   uint32_t freq = FrequencyCounter_ReadFrequency();
-  uint32_t period = FrequencyCounter_ReadPeriod();
+  //uint32_t period = FrequencyCounter_ReadPeriod();
 
   Serial.print("RPM = ");
   Serial.print(rpm);
-  Serial.print(", Period = ");
-  Serial.print(period);
+  //Serial.print(", Period = ");
+  //Serial.print(period);
   Serial.print(", Freq = ");
   Serial.println(freq); 
   
