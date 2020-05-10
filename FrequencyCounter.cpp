@@ -13,12 +13,17 @@ void FrequencyCounter_Init(int _inputPin, int _mode){
 }
 
 uint32_t FrequencyCounter_GetPeriodAverage(void){
+#if 0
     uint32_t sum = 0;
 
     for(uint8_t i = 0; i < BUFFER_SIZE;i++){
         sum += period[i];
     }
     return (sum/BUFFER_SIZE);
+#else
+
+    return periodFiltered;
+#endif
 }
 
 uint32_t FrequencyCounter_ReadPeriod(void){
@@ -66,11 +71,15 @@ void FrequencyCounter_EdgeDetected(void){
 
     previousMicros = currentMicros;
 
-    period[position] = p;
-    position++;
-
-    if(position>=BUFFER_SIZE){
-        position = 0;
+    if(p < MAX_PERIOD_US && p > MIN_PERIOD_US){
+        periodFiltered = Average(p, filterFactorLevel);
+        //periodFiltered = p;
     }
-    
+}
+
+uint32_t Average(uint32_t _newSample, uint8_t _filterFactorLevel)
+{
+  buffer -= buffer >> _filterFactorLevel;
+  buffer += _newSample;
+  return buffer >> _filterFactorLevel;
 }

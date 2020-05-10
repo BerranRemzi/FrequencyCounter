@@ -25,10 +25,11 @@
 static int inputPin = -1;
 static uint32_t freq[BUFFER_SIZE];
 static int mode = RISING;
-
-static uint32_t period[BUFFER_SIZE];
+static uint32_t filterFactorLevel = 6;
+static uint32_t periodFiltered = 0;
 static uint8_t position;
 static uint32_t previousMicros;
+static uint32_t buffer = 0;
 
 void FrequencyCounter_Init(int _inputPin, int _mode);
 uint32_t FrequencyCounter_GetPeriodAverage(void);
@@ -36,6 +37,7 @@ uint32_t FrequencyCounter_ReadPeriod(void);
 uint32_t FrequencyCounter_ReadRPM(void);
 uint32_t FrequencyCounter_ReadFrequency(void);
 void FrequencyCounter_EdgeDetected(void);
+uint32_t Average(uint32_t _newSample, uint8_t _filterFactorLevel);
     
 
 #endif /* FREQUENCY_COUNTER_H */
